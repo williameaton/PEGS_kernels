@@ -53,3 +53,7 @@ rm *_tmp.SAC
 cd $ZACC
 $sac ../macro_qssp_sac
 rm *_tmp.SAC
+
+# Get rid of the python file
+cd $master_path
+rm qssp_to_sac_loc.py
