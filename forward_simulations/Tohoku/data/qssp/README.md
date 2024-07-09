@@ -26,7 +26,7 @@ ftp://ftp.gfz-potsdam.de/home/turk/wang/
 
 ### (2) Running QSSP_PEGS
 
-1. Ensure you have `tohoku_PEGS_input_Eaton.inp` in your `qssp_PEGS` directory. 
+1. Ensure you have `tohoku_PEGS_input_Eaton.inp` in your `qssp_PEGS` directory. It is stored in `prem_elastic/input`.
 2. Run the code with 
 ```bash 
      $ ./bin/qssp tohoku_PEGS_input_Eaton.inp
