@@ -7,7 +7,7 @@ from scipy.special import erf
 import matplotlib.gridspec as gridspec
 from colour_schemes import hex
 import numpy as np
-from wetools import obspy_gen_mpl
+from wetools.funcs import obspy_gen_mpl
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
 def cs(time, alpha):
@@ -17,8 +17,9 @@ def cs(time, alpha):
 
 stn       = 'MDJ'
 network   = 'IC'
-data_fdir = 'NEW_MDJ_DATA'
-channel   = 'Z'
+data_fdir =  '../MDJ_kernel/mdj_forward_output_files'
+
+channel   = 'E'
 hdur      = 70
 
 # Parameters we choose:
@@ -46,7 +47,7 @@ store = [[], []]
 types =  [f'{channel}acc', f'{channel}grav']
 for i_trtype in range(2):
     trtype = types[i_trtype]
-    fpath = f'./{data_fdir}/{trtype}/{stn}_proc.sac'
+    fpath = f'{data_fdir}/{trtype}/{stn}_proc.sac'
 
     # Load in the sac:
     trace = obspy.read(fpath)
@@ -115,7 +116,7 @@ adj_src[2:-2]  = window[2:-2]*erf_poly_2nd
 # Lets now take the last two values from the polynomial tapered that doesnt have the err function
 adj_src[-2:] = 0
 adj_src[:2] = 0
-np.savetxt(f'./{data_fdir}/adj_source/{stn}_0.{network}.MX{channel}.adj', X=np.array([adj_time, adj_src]).T)
+np.savetxt(f'{data_fdir}/adj_source/{stn}.{network}.MX{channel}.adj', X=np.array([adj_time, adj_src]).T)
 
 
 # ---------------------- PLOT FIGURE ----------------------

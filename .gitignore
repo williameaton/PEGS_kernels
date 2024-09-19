@@ -63,3 +63,9 @@ MA2*
 INU*
 MDJ*
 NE93*
+
+__pycache__*
+*DS_Store
+
+*reg*proc*
+*RCVR*

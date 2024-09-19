@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from wetools import obspy_gen_mpl
+from wetools.funcs import obspy_gen_mpl
 import numpy as np
 import obspy
 

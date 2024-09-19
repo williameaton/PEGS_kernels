@@ -5,11 +5,6 @@ sys.path.append('../../classes')
 from pegs import create_pegs
 
 
-def obspy_gen_mpl(tr):
-    x = np.linspace(0, tr.stats.npts*tr.stats.delta,  tr.stats.npts)
-    y = tr.data
-    return x,y
-
 # Fiddle with order slightly so SPECFEM can plot on top
 real_clr = '#BB5566'
 
@@ -21,7 +16,7 @@ grid_lines_on = False
 vlinmin = 0.015
 
 
-# Load specfem and real data
+# Load specfem and real data - perfect sphere
 spec = create_pegs('data/globe_isotropic_prem/assuming_perfect_sphere/NEX256', code='SPECFEM')
 spec.load()
 spec.load_real_data("./data/Vallee_data/real_data")
@@ -69,7 +64,7 @@ for stn in spec.stns:
     for icode in [axitra, qssp, spec]:
         ltmp, = ax.plot(icode.time[stn], 9 + icode.pegs[stn] - ictr, color=icode.plot_colour, linewidth=lw_syn)
 
-        # Only add to legend string once
+        # Only add t o legend string once
         if ictr == 0:
             leg_lines.append(ltmp)
 
@@ -115,7 +110,7 @@ for a in [ax, ax3D]:
     a.set_xticks([-100, 0, 100, 200, 300])
     a.set_xticklabels(('-100', '0', '100', '200', '300'))
 
-#for path in ['./figures/', '../../Figures/pdfs/']:
-#    fig.savefig(f'{path}/PEGS_tohoku_benchmark.pdf', format='pdf')
+for path in ['./figures/', '../../Figures/pdfs/']:
+    fig.savefig(f'{path}/PEGS_tohoku_benchmark.pdf', format='pdf')
 plt.show()
 

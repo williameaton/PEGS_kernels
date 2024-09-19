@@ -22,7 +22,7 @@ SACHOME='/Users/eaton/sac'
 sac="$SACHOME/bin/sac"
 
 # Copy the qssp_to_sac python script 
-cp ../../../../qssp_to_sac.py qssp_to_sac_loc.py
+cp ../../../../processing/qssp_to_sac.py qssp_to_sac_loc.py
 
 # Correct the inputs for this simulation: 
 sed -i '' "s:^qssp_dir.*:qssp_dir = '$dir_path':" qssp_to_sac_loc.py
