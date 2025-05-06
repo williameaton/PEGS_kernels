@@ -1,0 +1,44 @@
+r  MAJO.sac
+r more INU.sac
+r more MDJ.sac
+r more INCN.sac
+r more NE93.sac
+r more BJT.sac
+r more MA2.sac
+r more XAN.sac
+r more ULN.sac
+
+chnhdr file 1 T0 57.95
+chnhdr file 2 T0 77.77
+chnhdr file 3 T0 165.81
+chnhdr file 4 T0 177.7
+chnhdr file 5 T0 237.43
+chnhdr file 6 T0 276.4
+chnhdr file 7 T0 292.3
+chnhdr file 8 T0 343.65
+chnhdr file 9 T0 344
+
+
+
+w MAJO_tmp.SAC INU_tmp.SAC MDJ_tmp.SAC INCN_tmp.SAC NE93_tmp.SAC BJT_tmp.SAC MA2_tmp.SAC  XAN_tmp.SAC ULN_tmp.SAC
+
+dc 1 2 3 4 5 6 7 8 9
+
+cut b T0
+
+r MAJO_tmp.SAC
+r more INU_tmp.SAC
+r more MDJ_tmp.SAC
+r more INCN_tmp.SAC
+r more NE93_tmp.SAC
+r more BJT_tmp.SAC
+r more MA2_tmp.SAC
+r more XAN_tmp.SAC
+r more ULN_tmp.SAC
+
+
+bp corner 0.002 0.03
+lp corner 0.03 n 4 p 1
+
+
+w MAJO_proc.sac INU_proc.sac MDJ_proc.sac INCN_proc.sac  NE93_proc.sac  BJT_proc.sac MA2_proc.sac XAN_proc.sac ULN_proc.sac
