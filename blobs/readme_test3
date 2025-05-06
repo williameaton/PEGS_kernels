@@ -1,0 +1,2 @@
+- Test 3 should resolve test 2 - moved the blob a tiny bit and reduced the radius to be 65 km instead of 100 km
+    + this is only in one of the two lobes of the simple rho kernel.

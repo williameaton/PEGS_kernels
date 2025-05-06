@@ -1,0 +1,49 @@
+Test a cylinder placed in the 15 - 24.4 km region that is 75 km wide and centred on the source in this layer.
+Cylinder made by creating a sphere and then restricting it to the layer
+
+This changes the rho, VP and VS as is also done in test 5
+
+# To repeat part one of this test you can switch
+rhoblob_custom_vp = 1.0
+rhoblob_custom_vs = 1.0
+
+
+
+  module mantle_rho_blobs
+    ! W. Eaton Feb 27 2025
+    ! Hacky way to add in blobs to the mantle?
+    logical, parameter :: ADD_RHOBLOBS_TO_MANTLE = .true.
+
+    ! If true below then perturbs rho, vp, vs (holds kappa, mu constant)
+    ! if false then perturbs rho, kappa, mu
+    logical, parameter :: RHOBLOBS_CUSTOM_WAVESPEEDS = .true.
+    logical, parameter :: RHOBLOBS_CONST_KAPPA_MU    = .false.
+    double precision, parameter :: rhoblob_custom_vp = 1.172413793103d0
+    double precision, parameter :: rhoblob_custom_vs = 1.21875d0
+
+    logical, parameter :: RHOBLOBS_RESTRICT_RADIAL_BOUNDS = .true.
+    ! 15 to 24.4 km
+    double precision, dimension(2) :: rhoblob_radlim   = (/6346.58d0, 6356.02d0/)
+
+
+    ! Number of rho blobs
+    integer, parameter :: nrhoblobs = 1
+
+    ! lat long of blobs
+    double precision, dimension(nrhoblobs) :: latrhoblobs = (/ 37.52d0/)
+    double precision, dimension(nrhoblobs) :: lonrhoblobs = (/143.05d0/)
+
+    ! Radial location of the blobs in km
+    double precision, dimension(nrhoblobs) :: radrhoblobs = (/6351.3d0/)
+
+    ! perturbation on the blob
+    double precision, dimension(nrhoblobs) :: drhoblobs   = (/0.11538d0/)
+
+    ! radii of blobs in km
+    double precision, dimension(nrhoblobs) :: blobrads   = (/75.0d0/)
+
+    integer :: ngllrblob = 0
+    ! mesh coordinates for these points
+    !double precision(nrhoblobs,3) :: coordrhoblobs
+
+  end module mantle_rho_blobs
