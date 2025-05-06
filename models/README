@@ -1,0 +1,12 @@
+This directory hosts a number of imaginary Earth models that were tested during communication with Shenjian Zhang:
+
+- AK135_wei: Model used in Zhang et al., 2020 (https://doi.org/10.1016/j.epsl.2020.116150)
+- AK135_1Cpremcrust: AK135_wei with crust replaced by upper crustal values from PREM model
+
+- PREM_2_crust: isotropic elastic PREM with ocean replaced by upper crustal material
+- PREM_1_crust: same as PREM_2_crust except the lower-crustal layer (15-24.4 km) contains upper crustal values
+
+# Other files:
+
+- plot_models.py: loads the above models and produces the plot comparing models in upper 1000 km
+- models.pdf: output from plot_models.py
