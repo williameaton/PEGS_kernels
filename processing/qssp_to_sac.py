@@ -2,7 +2,7 @@ import obspy
 import numpy as np
 from obspy.core.trace import Trace
 
-qssp_dir = ''
+qssp_dir = '/Users/eaton/Documents/Princeton/PEGS_kernels/forward_simulations/Tohoku/data/qssp/prem_elastic/'
 raw_dir  = qssp_dir + '/raw'
 grav_dir = qssp_dir + '/Grav'
 zacc_dir = qssp_dir + '/Zacc'

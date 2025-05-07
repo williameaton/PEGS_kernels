@@ -15,17 +15,20 @@ def cs(time, alpha):
     window = tukey(len(time), alpha)
     return window
 
+
+data_fdir  =  '../../data/MDJ_pegs_kernel/forward_output'
+adjsrc_dir =  '../../data/MDJ_pegs_kernel/adj_source'
+
 stn       = 'MDJ'
 network   = 'IC'
-data_fdir =  '../MDJ_kernel/mdj_forward_output_files'
 
-channel   = 'E'
+channel   = 'Z'
 hdur      = 70
 
 # Parameters we choose:
-tukey_alpha = 0.15  # Alpha value for Tukey taper
-tukey_buffer = 10   # Num of timesteps = 0 buffer on either side of Tukey
-poly_deg    = 6     # Polynomial degree for polynomial fit to pegs signal
+tukey_alpha  = 0.15  # Alpha value for Tukey taper
+tukey_buffer = 10    # Num of timesteps = 0 buffer on either side of Tukey
+poly_deg     = 6     # Polynomial degree for polynomial fit to pegs signal
 
 # Plotting:
 ytick_fs = 8        # Y tick font size
@@ -77,6 +80,15 @@ dx = time[1] - time[0]
 # ---------------------- POLYNOMIAL FIT TO PEGS DATA ----------------------
 p = np.polyfit(x=time, y=pegs, deg=poly_deg)
 
+xpoly = np.linspace(0, 150, 1000)
+ypoly = np.zeros(1000)
+for i in range(0, poly_deg-1):
+    n = poly_deg - i
+    ypoly += p[i]* (n-1) * n * (xpoly**(n-2) )
+
+
+
+
 # Compute polynomial pegs signal and its derivatives
 p_pegs    = np.zeros(ntimesteps)
 p_pegs_dd = np.zeros(ntimesteps)
@@ -116,7 +128,7 @@ adj_src[2:-2]  = window[2:-2]*erf_poly_2nd
 # Lets now take the last two values from the polynomial tapered that doesnt have the err function
 adj_src[-2:] = 0
 adj_src[:2] = 0
-np.savetxt(f'{data_fdir}/adj_source/{stn}.{network}.MX{channel}.adj', X=np.array([adj_time, adj_src]).T)
+np.savetxt(f'{adjsrc_dir}/{stn}.{network}.MX{channel}.adj', X=np.array([adj_time, adj_src]).T)
 
 
 # ---------------------- PLOT FIGURE ----------------------
@@ -136,6 +148,7 @@ axeslist = [axacc, axtap, ax2nd, axfin, axxax]     # ignoring the x axis (axxax)
 # Plot SPECFEM pegs signal
 axacc.plot(time, pegs,   color=pegs_clr)                    # original pegs acceleration from SPECFEM
 axacc.plot(time, p_pegs, color=poly_clr, linestyle=polyls)  # polynomial fit to pegs acceleration
+
 
 # Plot 2nd derivative traces
 ax2nd.plot(time[2:-2], dd_pegs, color=pegs_clr)             # 2nd derivative of SPECFEM pegs signal
