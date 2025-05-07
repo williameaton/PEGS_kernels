@@ -1,0 +1,10 @@
+### Blobs
+
+This directory hosts results and some analysis from a suite of tests used to check the PEGS sensitivity kernels. We add
+a 'blob' of perturbed material at different places to see how it affects the PEGS signals and the misfit function
+i.e. is it consistent with what is predicted by the sensitivity kernels
+
+#### Files:
+
+- anything with _cbl is computing the blob location
+- readme_test{i} details the specific test
