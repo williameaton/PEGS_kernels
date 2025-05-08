@@ -3,7 +3,7 @@ import ensightreader
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
-from load_proc_data import ProcData
+from funcs import EnData
 from analytical import analytical, analytical_alpha
 from matplotlib.gridspec import GridSpec
 
@@ -22,7 +22,7 @@ def norm(x):
 write_values_to_case = True
 
 nprocs = 864
-fpath ="./NEX192/"
+fpath ="./NEX64/"
 
 fig = plt.figure(layout="constrained", figsize=(10,7))
 gs = GridSpec(15,9, figure=fig)
@@ -54,18 +54,23 @@ Y = np.array([])
 Z = np.array([])
 V = np.array([])
 
-for i_proc in range(nprocs):
+#proclist = np.loadtxt("wanted_slices.txt").astype(int)
+proclist = np.arange(96)
+
+
+for i_proc in proclist:
     print(i_proc)
-    DProc = ProcData(proc=i_proc, fpath=fpath)
+    DProc = EnData(iproc=i_proc, fpath=fpath)
 
 
-    DProc.load_var('grav1_kernel')
-    g1 = DProc.data["grav1_kernel"]
+    DProc.load_ProcData('grav1_kernel')
+    g1 = DProc.vardata["grav1_kernel"]
 
-    mask = np.logical_and(DProc.coord[:,2] < 0.000000000005, DProc.coord[:,2] > -0.000000000005)
-    x = DProc.coord[mask,0]
-    y = DProc.coord[mask,1]
-    z = DProc.coord[mask,2]
+    mask = np.logical_and(DProc.node_coordinates[:,2] < 0.000000000005,
+                          DProc.node_coordinates[:,2] > -0.000000000005)
+    x = DProc.node_coordinates[mask,0]
+    y = DProc.node_coordinates[mask,1]
+    z = DProc.node_coordinates[mask,2]
     v = g1[mask]
     X = np.append(X,x[:])
     Y = np.append(Y,y[:])

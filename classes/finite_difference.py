@@ -1,22 +1,40 @@
 from abc import ABC, abstractmethod
 import os
+from copy import copy
 import numpy as np
 import math
 from wetools.geodetics import delaz
 
 class FD():
-    def __init__(self, fdir='./', from_readme=False):
+    def __init__(self, fdir='./', from_readme=False, readme_fname='/README'):
         self.fdir     = fdir
         self.stations = []
         self.nstns    = 0
 
         self.from_readme = from_readme
 
-        self.readme_file   = self.fdir + '/README'
+        self.readme_file   = self.fdir + readme_fname
         self.spfm_stn_file = self.fdir + '/STATIONS'
 
         if self.from_readme:
             self.setup_from_readme()
+
+
+    def save_distances_to_pickle(self, outfile):
+        self.epi_dist = {}
+
+        for s in self.stations:
+            self.epi_dist[s.name] = s.epi_dist_km
+
+        try:
+            import pickle
+        except:
+            raise RuntimeError('Can not import pickle module.')
+
+        with open(outfile, 'wb') as fp:
+            pickle.dump(self.epi_dist, fp)
+            print(f'Saved distances to {outfile}')
+
 
     def add_station(self, stn):
         self.stations.append(stn)
@@ -95,11 +113,73 @@ class FD():
                                        time_offset=time_offset,
                                        time_cutoff=time_cutoff))
 
-    def load_specfem_data(self,types,dpath, acc_mult=1):
+    def load_specfem_data(self,types,dpath, acc_mult=1, samp_code='B'):
         for istn in self.stations:
-            istn.load_specfem_data(types=types, dpath=dpath, acc_mult=acc_mult)
+            istn.load_specfem_data(types=types, dpath=dpath, acc_mult=acc_mult, samp_code=samp_code)
 
 
+
+
+    def load_simple_spfmx_strain(self, dpath, samp_code='M', acc_mult=1):
+        # Simple loading of strain at the stations rather than the FD version:
+
+
+        for stn in self.stations:
+            stndata = {}
+
+            loadpref = f"{dpath}/{stn.name}.{stn.network}"
+
+            loadstr = []
+            labels = []
+
+
+            for chl in ['ZZ', 'NN', 'EE', 'NZ', 'NE', 'EZ']:
+                label = f"{chl}.STRAIN"
+                loadstr.append(f'{loadpref}.{samp_code}X{label}.sem.ascii')
+                labels.append(label)
+
+            # Load data:
+            for ic in range(len(loadstr)):
+                d = np.loadtxt(loadstr[ic])
+                d[:, 0] += stn.time_offset
+
+                timemask = d[:,0]  < stn.time_cutoff
+
+                if type == 'pgrav':
+                    d[:,1]*=acc_mult
+
+                stndata[labels[ic]] = d[timemask,1]
+
+
+            stn.data = stndata
+            stn.data['time']  = d[timemask,0]
+
+
+
+
+
+
+
+    def reorder_stations_by_distance(self, src_lat, src_lon):
+
+        dists = []
+
+        ctr = 0
+        for istn in self.stations:
+            istn.compute_epicentral_distance(srclat=src_lat, srclon=src_lon)
+
+            dists.append([ctr, int(istn.epi_dist_km)])
+            ctr += 1
+
+        # Sort by distance:
+        dists = np.array(dists)
+        dists =  dists[dists[:, 1].argsort()]
+
+        new_stns = []
+        for i in range(self.nstns):
+            new_stns.append(self.stations[dists[i,0]])
+
+        self.stations = copy(new_stns)
 
 
     def strain_from_acc(self, method, dx=None, code='specfem'):
@@ -249,7 +329,6 @@ class FD():
 
     def load_qssp_grav_acc(self,fpath):
 
-        stnctr = 1
         for istn in self.stations:
 
             istn._check_qssp_exists()
@@ -258,7 +337,15 @@ class FD():
             mult = 1  # They output gravity acceleration not grad phi hence the minus sign
             for chl in 'zne':
                 # Columns are: time, centre, west, east, south, north
-                d = np.loadtxt(fname=f'{fpath}/RCVR{stnctr}_grav_{chl}.dat', skiprows=1)
+
+                if 'HS' in istn.name:
+                    stnnum = istn.name[2:]
+                    stn_load_name = istn.name
+                else:
+                    stn_load_name = istn.name
+
+
+                d = np.loadtxt(fname=f'{fpath}/{stn_load_name}_grav_{chl}.dat', skiprows=1)
 
                 timemask = d[:,0] < istn.time_cutoff
                 q['time'] = d[timemask,0]
@@ -270,9 +357,8 @@ class FD():
                 q[istn.name + '_23'][chllbl] = mult*d[timemask, 4]  # South
                 q[istn.name + '_43'][chllbl] = mult*d[timemask, 5]  # North
 
-            stnctr+=1
 
-    def load_qssp_strain(self,fpath, coord_sys):
+    def load_qssp_strain(self,fpath, coord_sys, suffix=''):
         stnctr = 1
         for istn in self.stations:
 
@@ -282,11 +368,11 @@ class FD():
             if coord_sys=='RTZ':
                 cchls = ['strain_time', '++', 'ZZ', 'XX', 'XX', 'RZ', 'TZ']
             elif coord_sys=='ENZ':
-                cchls = ['strain_time', 'EE', 'NN', 'ZZ', 'EN', 'NE', 'ZE', 'ZN']
+                cchls = ['strain_time', 'EE', 'NN', 'EN', 'NE', 'ZE', 'ZN']
             else:
                 raise ValueError(f'coord_sys can only be RTZ or ENZ but is {coord_sys}')
 
-            d = np.loadtxt(fname=f'{fpath}/RCVR{stnctr}_grav.h.{coord_sys}.dat', skiprows=1)
+            d = np.loadtxt(fname=f'{fpath}/RCVR{stnctr}_grav.h.dat{suffix}', skiprows=1)
             q['strain_time'] = d[:, 0]  # time
             for i in range(1,len(cchls)):
                 q[f"{cchls[i]}.STRAIN"]    =  d[:, i]
@@ -363,7 +449,6 @@ class FD():
                                 h_EZ,
                                 h_NZ,
                                 baz)
-
         else:
             raise ValueError('rotate_strain only nez_to_rtz method implemented')
 
@@ -489,7 +574,8 @@ class FdStation():
         f.write(f"  - time cutoff        :        {self.time_cutoff}\n\n")
 
 
-    def load_specfem_data(self, types, dpath, acc_mult=1):
+
+    def load_specfem_data(self, types, dpath, acc_mult=1, samp_code='B'):
 
         for stnname in self.snms:
             stndata = {}
@@ -503,16 +589,16 @@ class FdStation():
                 if type == 'pgrav':
                     for chl in 'ZNE':
                         label = f"{chl}C.PGRAV"
-                        loadstr.append(f'{loadpref}.BX{label}.sem.ascii')
+                        loadstr.append(f'{loadpref}.{samp_code}X{label}.sem.ascii')
                         labels.append(label)
                 elif type == 'strain':
                     for chl in ['ZZ', 'NN', 'EE', 'NZ', 'NE', 'EZ']:
                         label = f"{chl}.STRAIN"
-                        loadstr.append(f'{loadpref}.BX{label}.sem.ascii')
+                        loadstr.append(f'{loadpref}.{samp_code}X{label}.sem.ascii')
                         labels.append(label)
                 elif type == 'gpot':
                         label = "G"
-                        loadstr.append(f'{loadpref}.BX{label}.sem.ascii')
+                        loadstr.append(f'{loadpref}.{samp_code}X{label}.sem.ascii')
                         labels.append(label)
                 else:
                     raise ValueError(f'{type} data not implemented yet')

@@ -1,0 +1,8 @@
+# In this directory we run a test to check that the adjoint gravity solver is working correctly.
+# Essentially the idea is to use:
+
+(1) Use a force source in the forward solver and record the wavefield
+(2) Instead of applying an adjoint force, we can apply the same force as the 'adjoint' force which should produce
+    the same wavefield, albeit reversed in time
+
+This will tell us if our adjoint gravity is working -- which it is!
