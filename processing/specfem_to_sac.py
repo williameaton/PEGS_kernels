@@ -9,11 +9,11 @@ networks = {'MAJO':'IU', 'MDJ': 'IC','INU': 'GG',  'INCN': 'IU', 'NE93':'YP', 'B
 stations = ['MAJO', 'INU', 'MDJ', 'INCN', 'NE93', 'BJT', 'MA2', 'XAN', 'ULN']
 
 # Will load ascii from ```path/rawdir``` and save sac files in ```path/{chl}grav and``` ```path/{chl}acc```
-fpath = f"/Users/eaton/Documents/Princeton/PEGS_kernels/blobs/test_6_source_cylinder/"
+fpath = f"/Users/eaton/Documents/Princeton/PEGS_kernels/data/MDJ_pegs_kernel_Zonly/forward_output/"
 
 
 rawdir        = 'raw'   # SPECFEM ascii data directory
-chl           = 'N'     # Channel of interet
+chl           = 'Z'     # Channel of interet
 SPECFEM_GLOBE = False   # Set to true for spfm_globe ascii formatting
 
 for grav in [True, False]:

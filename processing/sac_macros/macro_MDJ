@@ -1,0 +1,17 @@
+r more MDJ.sac
+
+chnhdr file 1 T0 165.81
+
+
+w MDJ_tmp.SAC
+
+dc 1
+
+cut b T0
+
+r more MDJ_tmp.SAC
+
+bp corner 0.002 0.03
+lp corner 0.03 n 4 p 1
+
+w MDJ_proc.sac

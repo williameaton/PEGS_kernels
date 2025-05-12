@@ -2,15 +2,17 @@ import obspy
 import numpy as np
 from obspy.core.trace import Trace
 
-qssp_dir = '/Users/eaton/Documents/Princeton/PEGS_kernels/forward_simulations/Tohoku/data/qssp/prem_elastic/'
+qssp_dir = '/Users/eaton/Documents/Princeton/PEGS_kernels/data/data_forward_pegs/qssp/prem_elastic_2C_Mag8.5/'
 raw_dir  = qssp_dir + '/raw'
-grav_dir = qssp_dir + '/Grav'
-zacc_dir = qssp_dir + '/Zacc'
+
 name     = 'ps_vapf_0d'
 
 trr = Trace()
 
 chl = 'z'
+
+grav_dir = qssp_dir + f'/{chl.upper()}grav'
+zacc_dir = qssp_dir + f'/{chl.upper()}acc'
 
 # Loop for grav and ground acc
 for dataloop in range(2):

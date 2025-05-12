@@ -1,4 +1,7 @@
-# The idea here will be to try and calculate the convolution of the gravity kernels directly
+# Reads in ensight gold files: produces a list of specfem procs that
+# lie within a given range/region/mask that is then stored as a
+# text file with the proc ids
+
 import ensightreader
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -10,11 +13,13 @@ import math as m
 
 def cart2sph(x,y,z):
     XsqPlusYsq = x**2 + y**2
-    r = (XsqPlusYsq + z**2)**0.5              # r
+    r = (XsqPlusYsq + z**2)**0.5             # r
     elev = np.arctan2(z,XsqPlusYsq**0.5)     # theta
-    az = np.arctan2(y,x)                           # phi
+    az = np.arctan2(y,x)                     # phi
     return r, 180*elev/np.pi,  180*az/np.pi
 
+
+outfilename = 'wanted_slices_Tohoku.txt'
 
 R = 6371000
 Rcmb = R*(1- 2891/6371)
@@ -71,4 +76,4 @@ for i_proc in range(nprocs):
         pass
 
 
-np.savetxt(fname='wanted_slices_Tohoku.txt', X=wanted_sliced)
+np.savetxt(fname=outfilename, X=wanted_sliced)
