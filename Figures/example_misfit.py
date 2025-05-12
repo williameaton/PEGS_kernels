@@ -6,7 +6,7 @@ import scipy.signal as ss
 import numpy as np
 import matplotlib.pyplot as plt
 import obspy
-from wetools import obspy_gen_mpl
+from wetools.funcs import obspy_gen_mpl
 
 
 clr_key = {'real': '#BB5566'}
