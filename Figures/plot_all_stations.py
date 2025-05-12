@@ -25,8 +25,8 @@ def plot_all_stations(dpath):
                            add_land=True,
                            add_coastlines=True,
                            stnmarkersize=stnmarkersize,
-                           labels=[[0.5,-3,0.5,0.5,-4,0.5,0.2,-4, -2],
-                                   [0.5,0.5,0.5,0.5,-1.5,0.5,-1.8,1, 1]],
+                           labels=[[0.5,-3,0.5,0.5,-4,0.5,0.2,-4, -2, -1.6, -2.5],
+                                   [0.5,0.5,0.5,0.5,-1.5,0.5,-1.8,1, 1, 1, -1.8]],
                            marker_colour=HighContrast[1])
 
 
@@ -37,9 +37,9 @@ def plot_all_stations(dpath):
 
     # Label strain
     for i in range(6):
-        labx=[0.1,-0.8,0.5,0.2,-0.4,-0.2]
-        laby=[0.4,0.6,-1.2,0.3,0.6,-1.8]
-        ax.text(x=strain_stn_lon[i]+labx[i], y=strain_stn_lats[i]+laby[i], s=str(i+1),transform=crs.PlateCarree())
+        labx=[-0.43,-2.6,0.5,0.4,-0.6,-0.1]
+        laby=[0.7,1.0,-1.5,-1.8,0.7,-1.9]
+        ax.text(x=strain_stn_lon[i]+labx[i], y=strain_stn_lats[i]+laby[i], s=str(f"HS{i+1}"),transform=crs.PlateCarree())
 
     ax.legend(['PEGS stations', 'Strain stations', 'Tohoku 2011 source'], loc='upper left')
 
