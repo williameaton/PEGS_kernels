@@ -1,0 +1,14 @@
+Number of stations: 1
+Station                :        MDJ
+  - network            :        YY
+  - central latitude   :        44.617
+  - central longitude  :        129.5908
+  - delta latitude     :        0.04496608029593653
+  - delta longitude    :        0.06317078299015064
+  - radius             :        6371000.0
+  - geoco              :        1
+  - perfect sphere     :        True
+  - stencil            :        5 point
+  - order              :        2
+  - time offset        :        70
+  - time cutoff        :        175.5605129345939
