@@ -1,0 +1,239 @@
+Number of stations: 17
+Station                :        HS1
+  - network            :        YY
+  - central latitude   :        38.5
+  - central longitude  :        140.5
+  - delta latitude     :        0.04496608029593653
+  - delta longitude    :        0.05745669771292244
+  - radius             :        6371000.0
+  - geoco              :        1
+  - perfect sphere     :        True
+  - stencil            :        5 point
+  - order              :        2
+  - time offset        :        70
+  - time cutoff        :        31.916987495669115
+
+Station                :        HS2
+  - network            :        YY
+  - central latitude   :        37.75
+  - central longitude  :        139.5
+  - delta latitude     :        0.04496608029593653
+  - delta longitude    :        0.05686944888248143
+  - radius             :        6371000.0
+  - geoco              :        1
+  - perfect sphere     :        True
+  - stencil            :        5 point
+  - order              :        2
+  - time offset        :        70
+  - time cutoff        :        40.223320465699366
+
+Station                :        HS3
+  - network            :        YY
+  - central latitude   :        37.0
+  - central longitude  :        140.5
+  - delta latitude     :        0.04496608029593653
+  - delta longitude    :        0.05630363254605818
+  - radius             :        6371000.0
+  - geoco              :        1
+  - perfect sphere     :        True
+  - stencil            :        5 point
+  - order              :        2
+  - time offset        :        70
+  - time cutoff        :        29.927501584733516
+
+Station                :        HS4
+  - network            :        YY
+  - central latitude   :        45.0
+  - central longitude  :        135.3
+  - delta latitude     :        0.04496608029593653
+  - delta longitude    :        0.06359164060127104
+  - radius             :        6371000.0
+  - geoco              :        1
+  - perfect sphere     :        True
+  - stencil            :        5 point
+  - order              :        2
+  - time offset        :        70
+  - time cutoff        :        134.68199809690572
+
+Station                :        HS5
+  - network            :        YY
+  - central latitude   :        45.0
+  - central longitude  :        134.0
+  - delta latitude     :        0.04496608029593653
+  - delta longitude    :        0.06359164060127104
+  - radius             :        6371000.0
+  - geoco              :        1
+  - perfect sphere     :        True
+  - stencil            :        5 point
+  - order              :        2
+  - time offset        :        70
+  - time cutoff        :        143.5679086804026
+
+Station                :        HS6
+  - network            :        YY
+  - central latitude   :        43.7
+  - central longitude  :        134.0
+  - delta latitude     :        0.04496608029593653
+  - delta longitude    :        0.062196574976259134
+  - radius             :        6371000.0
+  - geoco              :        1
+  - perfect sphere     :        True
+  - stencil            :        5 point
+  - order              :        2
+  - time offset        :        70
+  - time cutoff        :        131.2671219825937
+
+Station                :        FUK
+  - network            :        YY
+  - central latitude   :        32.7177
+  - central longitude  :        128.7572
+  - delta latitude     :        0.04496608029593653
+  - delta longitude    :        0.05344554470835716
+  - radius             :        6371000.0
+  - geoco              :        1
+  - perfect sphere     :        True
+  - stencil            :        5 point
+  - order              :        2
+  - time offset        :        70
+  - time cutoff        :        179.30383072005597
+
+Station                :        MAJO
+  - network            :        YY
+  - central latitude   :        36.54567
+  - central longitude  :        138.2041
+  - delta latitude     :        0.04496608029593653
+  - delta longitude    :        0.055970949814389395
+  - radius             :        6371000.0
+  - geoco              :        1
+  - perfect sphere     :        True
+  - stencil            :        5 point
+  - order              :        2
+  - time offset        :        70
+  - time cutoff        :        56.81935959739482
+
+Station                :        INU
+  - network            :        YY
+  - central latitude   :        35.35
+  - central longitude  :        137.029
+  - delta latitude     :        0.04496608029593653
+  - delta longitude    :        0.05513028544013529
+  - radius             :        6371000.0
+  - geoco              :        1
+  - perfect sphere     :        True
+  - stencil            :        5 point
+  - order              :        2
+  - time offset        :        70
+  - time cutoff        :        75.54599400370734
+
+Station                :        NE93
+  - network            :        YY
+  - central latitude   :        46.927
+  - central longitude  :        122.4302
+  - delta latitude     :        0.04496608029593653
+  - delta longitude    :        0.0658429202353781
+  - radius             :        6371000.0
+  - geoco              :        1
+  - perfect sphere     :        True
+  - stencil            :        5 point
+  - order              :        2
+  - time offset        :        70
+  - time cutoff        :        253.07837796479163
+
+Station                :        BJT
+  - network            :        YY
+  - central latitude   :        40.0183
+  - central longitude  :        116.1679
+  - delta latitude     :        0.04496608029593653
+  - delta longitude    :        0.05871478780936702
+  - radius             :        6371000.0
+  - geoco              :        1
+  - perfect sphere     :        True
+  - stencil            :        5 point
+  - order              :        2
+  - time offset        :        70
+  - time cutoff        :        297.619917318581
+
+Station                :        MA2
+  - network            :        YY
+  - central latitude   :        59.5756
+  - central longitude  :        150.77
+  - delta latitude     :        0.04496608029593653
+  - delta longitude    :        0.08879539684486744
+  - radius             :        6371000.0
+  - geoco              :        1
+  - perfect sphere     :        True
+  - stencil            :        5 point
+  - order              :        2
+  - time offset        :        70
+  - time cutoff        :        319.6669561566091
+
+Station                :        XAN
+  - network            :        YY
+  - central latitude   :        34.0313
+  - central longitude  :        108.9237
+  - delta latitude     :        0.04496608029593653
+  - delta longitude    :        0.05425889431952165
+  - radius             :        6371000.0
+  - geoco              :        1
+  - perfect sphere     :        True
+  - stencil            :        5 point
+  - order              :        2
+  - time offset        :        70
+  - time cutoff        :        391.1796398390137
+
+Station                :        ULN
+  - network            :        YY
+  - central latitude   :        47.8651
+  - central longitude  :        107.0532
+  - delta latitude     :        0.04496608029593653
+  - delta longitude    :        0.06702567433706881
+  - radius             :        6371000.0
+  - geoco              :        1
+  - perfect sphere     :        True
+  - stencil            :        5 point
+  - order              :        2
+  - time offset        :        70
+  - time cutoff        :        395.9488252500056
+
+Station                :        SHR
+  - network            :        YY
+  - central latitude   :        44.0563
+  - central longitude  :        144.9944
+  - delta latitude     :        0.04496608029593653
+  - delta longitude    :        0.06256961050044597
+  - radius             :        6371000.0
+  - geoco              :        1
+  - perfect sphere     :        True
+  - stencil            :        5 point
+  - order              :        2
+  - time offset        :        70
+  - time cutoff        :        95.33606988150297
+
+Station                :        MDJ
+  - network            :        YY
+  - central latitude   :        44.617
+  - central longitude  :        129.5908
+  - delta latitude     :        0.04496608029593653
+  - delta longitude    :        0.06317078299015064
+  - radius             :        6371000.0
+  - geoco              :        1
+  - perfect sphere     :        True
+  - stencil            :        5 point
+  - order              :        2
+  - time offset        :        70
+  - time cutoff        :        175.5605129345939
+
+Station                :        INCN
+  - network            :        YY
+  - central latitude   :        37.4776
+  - central longitude  :        126.6239
+  - delta latitude     :        0.04496608029593653
+  - delta longitude    :        0.05666151025934123
+  - radius             :        6371000.0
+  - geoco              :        1
+  - perfect sphere     :        True
+  - stencil            :        5 point
+  - order              :        2
+  - time offset        :        70
+  - time cutoff        :        184.8721318967811
+

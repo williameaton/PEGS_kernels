@@ -1,0 +1,9 @@
+# To do the benchmarks:
+
+-- NEX256 input files are provided. Need ~ 4400 timesteps to produce HS stations, but ~ 10000 for all PEGS stations
+
+To produce QSSP:
+-- input file is provided. Run simulation.
+-- run script convert_to_per_station.py to convert the big .dat file to a station-wise set of files
+-- Run FD_h_qpegs.py to compute strain using Zhang method if desired. Note that I added in an extra output
+   that outputs the strain before it has been time-integrated. THIS is what is compared in my plots in NZE
